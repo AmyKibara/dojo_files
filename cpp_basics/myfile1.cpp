@@ -4,6 +4,8 @@
 #include <iomanip> //for changing decimal precision using cout
 #include <cstdio> //for printf -- not sure if necessary though -- it ran without this library]
 #include <vector> //for dynamic arrays
+#include <cmath> //for math ops
+#include <stdexcept> //for errors
 
 using namespace std; //to simplify code without std prefix
 
@@ -16,6 +18,7 @@ const char* robot_name = "Iskandar";
 void my_toggler(){
     is_active = false;
 }
+double divider(double a, double b);
 
 int main(int argc, char *argv[]){
     //BASIC INPUT OUTPUT
@@ -43,8 +46,8 @@ int main(int argc, char *argv[]){
     return 0; */
 
     //VARIABLES
-    //integers, floats, chars, bools
-    int distance = 100;
+    /*//integers, floats, chars, bools
+    int distance = 14;
     float speed = 4.89735621375;
     char direction = 'N';
     bool is_on = true;
@@ -75,11 +78,95 @@ int main(int argc, char *argv[]){
         cout << i << endl;
     }
 
+    //type-casting
+    double time = distance/speed;
+    int time_a, time_b;
+    cout<<"Implicit casting: "<<time<<endl;
+    time_a = (int)time; //C-style casting
+    time_b = static_cast<int>(time);//Cpp style casting
+
+    //String stream-for formating and merging diverse data types
+    stringstream ss;
+    ss<<"time_a: "<<time_a;
+    string log_entry = ss.str();
+    cout<<"Streamin: "<<log_entry<<endl;
+
+    //getline - reads entire line of input including spaces; unlike regular cin that just grabs the first work in a multi-word sentence
+    string command;
+    cout<<"Gimme command: ";
+    getline(cin, command);
+    cout<<"Executing "<<command<<endl;
+
     //user input
-    double chosen_speed;
+    string chosen_speed;
     cout<<"Enter desired speed: "<<endl;
     cin>> chosen_speed;
     cout<<"Setting speed to: "<<chosen_speed<<"m/s"<<endl;
-    return 0;
- 
+    
+    //Operators: +, -, /, *, %, 
+    //Conditions: && (and), || (or); break exits loop immediately, continue skips current iteration and moves to next iteration
+    //Ternary operator
+    int A = 78;
+    int B = 90;
+    int C = (A > B) ? A:B;//if true, return the first, if false, return the second --for simple if-else statements
+    printf("%d\n", C);*/
+
+    //Arrays - have fixed size
+    /* const int size = 5;
+    int arr_1[size];
+    for(int i=0; i<size; ++i){
+        arr_1[i] = i*10;
+        cout<<arr_1[i]<<endl;
+    }
+    //Vectors - resizeable
+    vector <int> arr_2;
+    arr_2.push_back(90);
+    arr_2.push_back(40);
+    arr_2.push_back(50);//to add elements
+    arr_2.pop_back();//removes last element
+    for (int i=0; i<arr_2.size(); i++){
+        cout<<arr_2[i]<<endl;
+    }
+    //Strings
+    string var_3 = "melki";
+    cout<<var_3[0]<<endl;
+    string var_4 = var_3 + "_";
+    cout<<var_4<<endl;
+    char var_6 = var_3[0];
+    char var_7 = toupper(var_6);
+    cout<<var_7<<endl; */
+
+    //Math ops
+    double angle = 4.0;
+    double angle_rad = angle * M_PI / 180.0;
+    double angle_tan = sin(angle_rad)/cos(angle_rad);//sin n cos to radian angles
+    cout<<"TAN: "<<angle_tan<<endl;
+
+    //Functions declared at top of file; defined after main
+    //Pointers
+    int my_id = 90;
+    int* my_id_ptr = &my_id;
+    cout<<"my_id: "<<my_id<<endl;
+    cout<<"my_id_ptr: "<<my_id_ptr<<endl;
+    cout<<"my_id_ptr_dereferenced:"<<*my_id_ptr<<endl;
+    *my_id_ptr = 56;
+    cout<<"new my_id:"<<my_id<<endl;
+
+    //Error catching-good for risky code that might crash ur code
+    try{
+        double var_4 = divider(4.5, 0);
+        cout<<var_4<<endl;
+    }
+    catch(const exception& e){
+        cerr<<"Error! :"<<e.what()<<endl;
+    } 
+    cout<<"yay didnt break my code!"<<endl;
+    return 0; 
+}
+
+double divider(double a, double b){
+    if(b==0){
+        throw runtime_error("Division kby zero");
+    }
+    return a/b;
 }
