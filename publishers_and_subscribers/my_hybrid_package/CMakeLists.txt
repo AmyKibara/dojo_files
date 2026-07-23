@@ -13,6 +13,7 @@ find_package(std_msgs REQUIRED)
 
 set(dependencies
   rclcpp
+  rclpy
   std_msgs
 )
 

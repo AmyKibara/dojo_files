@@ -18,10 +18,6 @@ set(dependencies
 add_executable(my_node_b src/node_b.cpp)
 ament_target_dependencies(my_node_b ${dependencies})
 
-install(
-  DIRECTORY include/
-  DESTINATION include
-)
 
 install(
   TARGETS
